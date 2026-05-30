@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balance JAD 2026 - 2B</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul:       #1B3A6B;
+    --azul-claro: #2D5AA0;
+    --celeste:    #4A9ECC;
+    --celeste-dark: #2980b9;
+    --celeste-header: #1a7fbf;
+    --dorado:     #C8962E;
+    --dorado-lt:  #F0C55A;
+    --bg:         #F0F7FC;
+    --blanco:     #FFFFFF;
+    --gris:       #6B7280;
+    --verde:      #166534;
+    --verde-lt:   #DCFCE7;
+    --rojo:       #991B1B;
+    --rojo-lt:    #FEE2E2;
+    --amarillo-lt:#FEF9C3;
+    --borde:      #C8DFF0;
+    --sombra:     0 4px 24px rgba(26,127,191,0.13);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--celeste-header) 0%, var(--celeste) 60%, #6ab8d8 100%);
+    padding: 36px 24px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.12) 0%, transparent 60%);
+  }
+  .header::after {
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(circle at 10% 80%, rgba(255,255,255,0.08) 0%, transparent 50%);
+  }
+  .header-badge {
+    display:inline-block;
+    background: rgba(255,255,255,0.18);
+    border: 1.5px solid rgba(255,255,255,0.6);
+    color: #fff;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 2px 6px rgba(0,0,0,0.4);
+    font-size: 11px; font-weight:700; letter-spacing:2px;
+    padding: 5px 16px; border-radius: 20px;
+    margin-bottom: 14px; text-transform:uppercase;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 5vw, 38px);
+    color: #fff;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 0 3px 8px rgba(0,0,0,0.5);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+  .header h1 span {
+    color: #fff;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000, 0 3px 8px rgba(0,0,0,0.5);
+  }
+  .header-sub {
+    color: #fff;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 2px 4px rgba(0,0,0,0.4);
+    font-size: 13px; margin-top: 8px; font-weight: 500;
+  }
+  .gen-date {
+    position:absolute; top:14px; right:16px;
+    color: rgba(255,255,255,0.85);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    font-size:11px;
+  }
+
+  /* PDF BTN */
+  .pdf-bar {
+    background: var(--celeste-dark);
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding: 10px 24px;
+    text-align: center;
+  }
+  .pdf-btn {
+    display: inline-flex; align-items:center; gap: 8px;
+    background: #fff;
+    color: var(--celeste-dark);
+    border: none; cursor:pointer;
+    padding: 10px 28px; border-radius: 8px;
+    font-family:'DM Sans',sans-serif; font-size:14px; font-weight:700;
+    letter-spacing:0.3px;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  .pdf-btn:hover { background:#e8f4fd; transform:translateY(-1px); }
+  .pdf-btn svg { width:16px; height:16px; }
+
+  
+
+  /* MAIN */
+  .container { max-width:1100px; margin:0 auto; padding:28px 16px 48px; }
+
+  /* KPI CARDS */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px; margin-bottom: 28px;
+  }
+  .kpi {
+    background: var(--blanco);
+    border-radius: 14px;
+    padding: 20px 18px;
+    box-shadow: var(--sombra);
+    border-left: 4px solid var(--celeste);
+    transition: transform .2s;
+    min-width: 0;
+  }
+  .kpi:hover { transform: translateY(-2px); }
+  .kpi.verde { border-left-color: #16a34a; }
+  .kpi.rojo  { border-left-color: #dc2626; }
+  .kpi.dorado{ border-left-color: var(--celeste-dark); }
+  .kpi-label { font-size:11px; font-weight:600; letter-spacing:1px;
+                color: var(--gris); text-transform:uppercase; margin-bottom:6px; }
+  .kpi-value { font-family:'Playfair Display',serif;
+                font-size:clamp(20px,3.5vw,28px); font-weight:700; color:var(--celeste-dark);
+                white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .kpi.verde .kpi-value { color:#15803d; }
+  .kpi.rojo  .kpi-value { color:#dc2626; }
+  .kpi.dorado .kpi-value { color:var(--celeste-dark); }
+  .kpi-sub { font-size:11px; color:var(--gris); margin-top:4px; }
+
+  /* SECTION */
+  .section {
+    background: var(--blanco);
+    border-radius: 16px;
+    box-shadow: var(--sombra);
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+  .section-header {
+    background: linear-gradient(90deg, var(--celeste-header) 0%, var(--celeste) 100%);
+    padding: 14px 22px;
+    display: flex; align-items:center; gap:10px;
+  }
+  .section-header h2 {
+    font-family:'Playfair Display',serif;
+    font-size:16px; font-weight:700; color:#fff; letter-spacing:0.3px;
+  }
+  .section-icon { font-size:18px; }
+  .section-body { padding: 20px 22px; }
+
+  /* TABLA MENSUAL SALDO */
+  .tabla-saldo { width:100%; border-collapse:collapse; font-size:12px; }
+  .tabla-saldo th {
+    background: #e8f4fd; color:var(--celeste-dark); font-weight:600;
+    padding: 8px 8px; text-align:center; border-bottom:2px solid var(--borde);
+    font-size:10.5px; letter-spacing:0.5px; white-space:nowrap;
+  }
+  .tabla-saldo td {
+    padding: 8px 8px; text-align:center; border-bottom:1px solid var(--borde);
+    color: #374151; white-space:nowrap;
+  }
+  .tabla-saldo tr:last-child td { border-bottom:none; font-weight:600; }
+  .num-verde { color: var(--verde); font-weight:600; }
+  .num-rojo  { color: var(--rojo);  font-weight:600; }
+
+  /* TABLA ALUMNOS */
+  .tabla-alumnos { width:100%; border-collapse:collapse; font-size:11.5px; table-layout:auto; }
+  .tabla-alumnos th {
+    background: var(--celeste-dark); color:#fff; font-weight:600;
+    padding: 9px 6px; text-align:center; font-size:10px; letter-spacing:0.3px;
+    white-space:nowrap;
+  }
+  .tabla-alumnos th:first-child { text-align:center; padding-left:8px; width:30px; }
+  .tabla-alumnos th:nth-child(2) { text-align:left; padding-left:10px; min-width:160px; }
+  .tabla-alumnos td {
+    padding: 7px 6px; text-align:center; border-bottom:1px solid var(--borde);
+    color:#374151; white-space:nowrap;
+  }
+  .tabla-alumnos td:first-child { text-align:center; padding-left:8px; font-weight:600; color:var(--gris); }
+  .tabla-alumnos td:nth-child(2) { text-align:left; padding-left:10px; font-weight:500; }
+  .tabla-alumnos tr:nth-child(even) td { background:#f4f9fd; }
+  .tabla-alumnos tr:hover td { background: #e8f4fd; }
+  .pago-si { background:#d1fae5; color:#065f46; border-radius:4px;
+              padding:2px 5px; font-weight:700; font-size:10.5px; display:inline-block; white-space:nowrap; }
+  .pago-no { background:var(--rojo-lt); color:var(--rojo); border-radius:4px;
+              padding:2px 5px; font-weight:600; font-size:10.5px; display:inline-block; }
+  .badge-pendiente {
+    display:inline-block; background:var(--rojo-lt); color:var(--rojo);
+    border-radius:12px; padding:2px 8px; font-size:10.5px; font-weight:700; white-space:nowrap;
+  }
+  .badge-ok {
+    display:inline-block; background:var(--verde-lt); color:var(--verde);
+    border-radius:12px; padding:2px 8px; font-size:10.5px; font-weight:700;
+  }
+
+  /* TABLA EGRESOS */
+  .tabla-egresos { width:100%; border-collapse:collapse; font-size:13px; }
+  .tabla-egresos th {
+    background:var(--celeste-dark); color:#fff; font-weight:600;
+    padding:9px 12px; text-align:left; font-size:11px; letter-spacing:0.5px;
+    white-space:nowrap;
+  }
+  .tabla-egresos th:last-child { text-align:right; }
+  .tabla-egresos td {
+    padding:8px 12px; border-bottom:1px solid var(--borde); color:#374151;
+    white-space:nowrap;
+  }
+  .tabla-egresos td:last-child { text-align:right; font-weight:600; color:var(--rojo); }
+  .tabla-egresos tr:nth-child(even) td { background:#f4f9fd; }
+  .mes-tag {
+    display:inline-block; background:#e8f4fd; color:var(--celeste-dark);
+    border-radius:4px; padding:2px 8px; font-size:10.5px; font-weight:600;
+  }
+  .act-tag {
+    display:inline-block; background:#FEF3C7; color:#92400E;
+    border-radius:4px; padding:2px 8px; font-size:10.5px; font-weight:600;
+  }
+
+  /* ACTIVIDADES */
+  .act-grid {
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:12px;
+  }
+  .act-card {
+    border:1px solid var(--borde); border-radius:10px; padding:14px 16px;
+    background:#f4f9fd;
+  }
+  .act-nombre { font-weight:600; color:var(--celeste-dark); font-size:13px; }
+  .act-fecha {
+    font-size:11px; color:var(--gris); margin-top:4px;
+    display:flex; align-items:center; gap:5px;
+  }
+
+  /* RESUMEN PENDIENTES */
+  .pdte-grid {
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(120px,1fr)); gap:10px;
+  }
+  .pdte-card {
+    background:#f4f9fd; border:1px solid var(--borde);
+    border-radius:10px; padding:12px 14px; text-align:center;
+  }
+  .pdte-mes { font-size:11px; font-weight:600; color:var(--gris); margin-bottom:4px; }
+  .pdte-num { font-size:22px; font-weight:700;
+               font-family:'Playfair Display',serif; color:var(--rojo); }
+  .pdte-label { font-size:10px; color:var(--gris); }
+
+  /* LOADING */
+  #loading-overlay {
+    display:none; position:fixed; inset:0; background:rgba(26,127,191,0.15);
+    z-index:100; align-items:center; justify-content:center;
+  }
+  #loading-overlay.visible { display:flex; }
+  .loading-box {
+    background:#fff; border-radius:12px; padding:24px 32px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.2); text-align:center;
+    color:var(--celeste-dark); font-weight:600;
+  }
+
+  /* PRINT */
+  @media print {
+    .pdf-bar { display:none !important; }
+    body { background:#fff; }
+    .section { box-shadow:none; border:1px solid #ddd; page-break-inside:avoid; }
+    .header { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .kpi { box-shadow:none; border:1px solid #ddd; }
+    .tabla-alumnos, .tabla-saldo, .tabla-egresos { font-size:10px; }
+    .tabla-alumnos th, .tabla-alumnos td,
+    .tabla-saldo th, .tabla-saldo td { padding:4px 4px; }
+    @page { margin: 1cm; }
+  }
+  @media (max-width:600px) {
+    .tabla-alumnos { font-size:10px; }
+    .tabla-alumnos th, .tabla-alumnos td { padding:5px 3px; }
+    .kpi-value { font-size:18px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loading-overlay">
+  <div class="loading-box">⏳ Cargando datos desde Google Sheets...</div>
+</div>
+
+<div class="header">
+  <span class="gen-date">Generado: <span id="gen-date"></span></span>
+  <div class="header-badge">Juana Alarco de Dammert</div>
+  <h1>Balance <span>JAD</span> 2026</h1>
+  <p class="header-sub">Institución Educativa · Aula 2B</p>
+</div>
+
+<div class="pdf-bar">
+  <button class="pdf-btn" onclick="imprimirPDF()">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M12 16l-4-4h3V4h2v8h3l-4 4z"/>
+      <path d="M20 18H4v2h16v-2z"/>
+    </svg>
+    Descargar PDF
+  </button>
+</div>
+<div id="status-bar" style="display:flex; padding:8px 24px; font-size:12px; font-weight:600; align-items:center; justify-content:center; gap:10px; background:#DCFCE7; color:#166534;">
+  📅 Datos actualizados al: <span id="fecha-actualizacion"></span> &nbsp;·&nbsp; Para actualizar, ejecuta <strong>actualizar_balance.py</strong>
+</div>
+
+
+<div class="container" id="main-content">
+  <div class="kpi-grid" id="kpi-grid"></div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">📊</span>
+      <h2>Resumen Mensual de Saldo</h2>
+    </div>
+    <div class="section-body" style="overflow-x:auto;">
+      <table class="tabla-saldo" id="tabla-saldo"></table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">⏳</span>
+      <h2>Cuotas Pendientes por Mes</h2>
+    </div>
+    <div class="section-body">
+      <div class="pdte-grid" id="pdte-grid"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">👧</span>
+      <h2>Estado de Pagos por Alumna</h2>
+    </div>
+    <div class="section-body" style="overflow-x:auto;">
+      <table class="tabla-alumnos" id="tabla-alumnos"></table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🧾</span>
+      <h2>Detalle de Egresos</h2>
+    </div>
+    <div class="section-body" style="overflow-x:auto;">
+      <table class="tabla-egresos" id="tabla-egresos"></table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🎉</span>
+      <h2>Actividades del Año</h2>
+    </div>
+    <div class="section-body">
+      <div class="act-grid" id="act-grid"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ──────────────────────────────────────────────
+//  DATOS BASE (se usan si no hay Google Sheet)
+// ──────────────────────────────────────────────
+const DATA_BASE = {
+  "generado": "29/05/2026 18:22",
+  "saldo": {
+    "actual": 521.4,
+    "total_ingresos": 1140.0,
+    "total_egresos": -618.6,
+    "meses": ["04. Abril","05.Mayo","06. Junio","07. Julio","08. Agosto","09. Setiembre","10. Octubre","11. Noviembre","12. Diciembre"],
+    "ingresos_mes": [560,240,80,60,40,40,40,40,40],
+    "egresos_mes":  [-164.1,-454.5,0,0,0,0,0,0,0],
+    "saldo_mes":    [395.9,-214.5,80,60,40,40,40,40,40]
+  },
+  "ingresos": {
+    "alumnos": [
+      {"num":1,"nombre":"Aguilar Pacheco Briana Mikela","pagos":[20,5,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":45,"pendiente":140},
+      {"num":2,"nombre":"Almidón Micaela","pagos":[20,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":25,"pendiente":160},
+      {"num":3,"nombre":"Álvarez Cotrina Ariana Micaela","pagos":[20,5,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":45,"pendiente":140},
+      {"num":4,"nombre":"Amaya Ayala Ariana Jocabet","pagos":[20,5,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":45,"pendiente":140},
+      {"num":5,"nombre":"Benites Copez Macarena Sophia","pagos":[20,5,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":45,"pendiente":140},
+      {"num":6,"nombre":"Cahuana Herrera Alexia","pagos":[20,5,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":45,"pendiente":140},
+      {"num":7,"nombre":"Cruz Zapata María Jose","pagos":[20,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":25,"pendiente":160},
+      {"num":8,"nombre":"Delgado Rosas Andra Valkiria","pagos":[20,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":25,"pendiente":160},
+      {"num":9,"nombre":"Espinoza Laupa Ellen","pagos":[20,5,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":45,"pendiente":140},
+      {"num":10,"nombre":"Huamani Quispe Luana Isabella","pagos":[20,5,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":45,"pendiente":140},
+      {"num":11,"nombre":"Huaripata Hernández Saray Valentina","pagos":[20,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":25,"pendiente":160},
+      {"num":12,"nombre":"Lastrera Moscoso Angie Janice","pagos":[20,5,20,0,20,0,20,0,20,0,20,0,20,0,20,0,20,0],"acumulado":185,"pendiente":0},
+      {"num":13,"nombre":"Lizano Rihanna","pagos":[20,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":25,"pendiente":160},
+      {"num":14,"nombre":"Luciani Casas Khalessi Ruth","pagos":[20,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":25,"pendiente":160},
+      {"num":15,"nombre":"Mori Pérez Alexia","pagos":[20,5,20,0,20,0,20,0,20,0,20,0,20,0,20,0,20,0],"acumulado":185,"pendiente":0},
+      {"num":16,"nombre":"Ortiz Vega Angely","pagos":[20,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":25,"pendiente":160},
+      {"num":17,"nombre":"Payehuanca Polo Khaleesi","pagos":[20,5,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":45,"pendiente":140},
+      {"num":18,"nombre":"Pedraza Chipana Adriana Cristie","pagos":[20,5,20,0,20,0,20,0,0,0,0,0,0,0,0,0,0,0],"acumulado":85,"pendiente":100},
+      {"num":19,"nombre":"Quiñonez Palomino Daniela Valentina","pagos":[20,5,20,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":65,"pendiente":120},
+      {"num":20,"nombre":"Ramírez Espinoza Hanna Celeste","pagos":[0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":5,"pendiente":180},
+      {"num":21,"nombre":"Ramírez Flores Sophia Alessia","pagos":[0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":5,"pendiente":180},
+      {"num":22,"nombre":"Sánchez Gonzales Angeles","pagos":[20,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":25,"pendiente":160},
+      {"num":23,"nombre":"Yresales Cedano Dayra Samantha","pagos":[20,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"acumulado":25,"pendiente":160}
+    ],
+    "pendientes_por_mes":[2,11,19,20,21,21,21,21,21],
+    "meses":["Abril","Bienvenida","Mayo","Junio","Julio","Agosto","Setiembre","Octubre","Noviembre","Diciembre"],
+    "total_padres":23,
+    "cuota_x_padre":185,
+    "donacion":25,
+    "total_anio":4280
+  },
+  "egresos": {
+    "gastos":[
+      {"mes":"04. Abril","actividad":"","detalle":"PAPEL HIGIENICO","importe":28},
+      {"mes":"04. Abril","actividad":"BIENVENIDA","detalle":"DESCARTABLES","importe":10},
+      {"mes":"04. Abril","actividad":"BIENVENIDA","detalle":"FRUTAS 1","importe":64},
+      {"mes":"04. Abril","actividad":"BIENVENIDA","detalle":"FRUTAS 2","importe":25},
+      {"mes":"04. Abril","actividad":"BIENVENIDA","detalle":"YOGURT Y CEREAL","importe":32.1},
+      {"mes":"04. Abril","actividad":"","detalle":"CURITAS","importe":5},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"POLLO 1 PECHO - NIÑAS","importe":17},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"POLLO 3 PECHO - MADRES","importe":40},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"MAYONESA - NIÑAS","importe":13.5},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"MAYONESA - MADRES","importe":17},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"PETIPAN","importe":15},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"CAJA FRUGOS","importe":30},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"2 CAJAS FRUGOS 1.2 LITROS","importe":10},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"VIRUTA","importe":20},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"CAJA Y BOLSA - REGALO MISS","importe":12},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"MOCHILA MISS","importe":42},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"21 BILLETERAS","importe":168},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"GLOBOS CORTINA BANDA Y BOLSA CELOFAN","importe":30.5},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"PASAJES GLORIA","importe":15},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"PASAJES YULI","importe":10},
+      {"mes":"05.Mayo","actividad":"DÍA DE LA MADRE","detalle":"GIGANTOGRAFIA","importe":14.5}
+    ],
+    "total":618.6
+  },
+  "actividades":[
+    {"nombre":"1. Día de la Madre","fecha":"Mayo"},
+    {"nombre":"2. Día del Padre","fecha":"Junio"},
+    {"nombre":"3. Aniversario JAD","fecha":"Junio"},
+    {"nombre":"4. Día del Maestro","fecha":"Julio"},
+    {"nombre":"5. Fiestas Patrias","fecha":"Julio"},
+    {"nombre":"6. Olimpiadas","fecha":"Setiembre"},
+    {"nombre":"7. Derechos del Niño","fecha":"Noviembre"},
+    {"nombre":"8. Navidad","fecha":"Diciembre"}
+  ]
+};
+
+let DATA = JSON.parse(JSON.stringify(DATA_BASE));
+
+// ──────────────────────────────────────────────
+//  UTILIDADES
+// ──────────────────────────────────────────────
+function fmt(n) {
+  return 'S/ ' + Number(n).toLocaleString('es-PE', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+function actualizarFecha() {
+  const ahora = new Date();
+  const dd = String(ahora.getDate()).padStart(2,'0');
+  const mm = String(ahora.getMonth()+1).padStart(2,'0');
+  const yyyy = ahora.getFullYear();
+  const hh = String(ahora.getHours()).padStart(2,'0');
+  const min = String(ahora.getMinutes()).padStart(2,'0');
+  document.getElementById('gen-date').textContent = `${dd}/${mm}/${yyyy} ${hh}:${min}`;
+}
+
+// ──────────────────────────────────────────────
+//  RENDER DASHBOARD
+// ──────────────────────────────────────────────
+function renderDashboard() {
+  actualizarFecha();
+  const fa = document.getElementById('fecha-actualizacion');
+  if (fa) fa.textContent = DATA.generado || '—';
+  renderKPIs();
+  renderTablaSaldo();
+  renderPendientes();
+  renderTablaAlumnos();
+  renderTablaEgresos();
+  renderActividades();
+}
+
+function renderKPIs() {
+  const kpis = [
+    { label:'Saldo Actual',    value: fmt(DATA.saldo.actual),               cls:'verde', sub:'Acumulado disponible' },
+    { label:'Total Ingresos',  value: fmt(DATA.saldo.total_ingresos),        cls:'',      sub:'Recaudado 2026' },
+    { label:'Total Egresos',   value: fmt(Math.abs(DATA.saldo.total_egresos)),cls:'rojo', sub:'Gastos ejecutados' },
+    { label:'Cuota x Padre',   value: fmt(DATA.ingresos.cuota_x_padre),      cls:'dorado',sub:DATA.ingresos.total_padres + ' padres · todo el año' },
+  ];
+  const kg = document.getElementById('kpi-grid');
+  kg.innerHTML = '';
+  kpis.forEach(k => {
+    kg.innerHTML += `<div class="kpi ${k.cls}">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.value}</div>
+      <div class="kpi-sub">${k.sub}</div>
+    </div>`;
+  });
+}
+
+function renderTablaSaldo() {
+  const ts = document.getElementById('tabla-saldo');
+  const meses = DATA.saldo.meses;
+  const th = '<tr><th>Concepto</th>' + meses.map(m=>`<th>${m}</th>`).join('') + '<th>TOTAL</th></tr>';
+  const ri = '<tr><td>Ingresos</td>' + DATA.saldo.ingresos_mes.map(v=>`<td class="num-verde">${fmt(v)}</td>`).join('') + `<td class="num-verde">${fmt(DATA.saldo.total_ingresos)}</td></tr>`;
+  const re = '<tr><td>Egresos</td>' + DATA.saldo.egresos_mes.map(v=>`<td class="${v<0?'num-rojo':''}">${v!==0?fmt(Math.abs(v)):'-'}</td>`).join('') + `<td class="num-rojo">${fmt(Math.abs(DATA.saldo.total_egresos))}</td></tr>`;
+  const rs = '<tr><td><strong>Saldo Mes</strong></td>' + DATA.saldo.saldo_mes.map(v=>`<td class="${v>=0?'num-verde':'num-rojo'}">${fmt(v)}</td>`).join('') + `<td class="${DATA.saldo.actual>=0?'num-verde':'num-rojo'}">${fmt(DATA.saldo.actual)}</td></tr>`;
+  ts.innerHTML = '<thead>' + th + '</thead><tbody>' + ri + re + rs + '</tbody>';
+}
+
+function renderPendientes() {
+  const pg = document.getElementById('pdte-grid');
+  pg.innerHTML = '';
+  const mesesPdte = DATA.ingresos.meses;
+  DATA.ingresos.pendientes_por_mes.forEach((n, i) => {
+    pg.innerHTML += `<div class="pdte-card">
+      <div class="pdte-mes">${mesesPdte[i]||''}</div>
+      <div class="pdte-num">${n}</div>
+      <div class="pdte-label">sin pagar</div>
+    </div>`;
+  });
+}
+
+function renderTablaAlumnos() {
+  const ta = document.getElementById('tabla-alumnos');
+  const colsDisplay = ['Abril','Bienvenida','Mayo','Jun','Jul','Ago','Set','Oct','Nov','Dic'];
+  const colIdx = [0,1,2,6,8,10,12,14,16,18];
+  const taHead = '<tr><th>#</th><th>Alumna</th>' + colsDisplay.map(c=>`<th>${c}</th>`).join('') + '<th>Acumulado</th><th>Pendiente</th></tr>';
+  let taBody = '';
+  DATA.ingresos.alumnos.forEach(a => {
+    const celdas = colIdx.map(ci => {
+      const v = a.pagos[ci] || 0;
+      if (v > 0) return `<td><span class="pago-si">S/${v}</span></td>`;
+      return `<td><span class="pago-no">—</span></td>`;
+    }).join('');
+    const pendBadge = a.pendiente > 0
+      ? `<td><span class="badge-pendiente">S/${a.pendiente}</span></td>`
+      : `<td><span class="badge-ok">Al día</span></td>`;
+    taBody += `<tr><td>${a.num}</td><td>${a.nombre}</td>${celdas}<td><strong>${fmt(a.acumulado)}</strong></td>${pendBadge}</tr>`;
+  });
+  ta.innerHTML = '<thead>' + taHead + '</thead><tbody>' + taBody + '</tbody>';
+}
+
+function renderTablaEgresos() {
+  const te = document.getElementById('tabla-egresos');
+  const teHead = '<tr><th>Mes</th><th>Actividad</th><th>Detalle</th><th style="text-align:right">Importe</th></tr>';
+  let teBody = DATA.egresos.gastos.map(g => `<tr>
+    <td><span class="mes-tag">${g.mes}</span></td>
+    <td>${g.actividad ? `<span class="act-tag">${g.actividad}</span>` : ''}</td>
+    <td>${g.detalle}</td>
+    <td>${fmt(g.importe)}</td>
+  </tr>`).join('');
+  teBody += `<tr><td colspan="3" style="text-align:right;font-weight:700;color:var(--celeste-dark)">TOTAL EGRESOS</td><td style="color:var(--rojo);font-weight:700;font-size:15px">${fmt(DATA.egresos.total)}</td></tr>`;
+  te.innerHTML = '<thead>' + teHead + '</thead><tbody>' + teBody + '</tbody>';
+}
+
+function renderActividades() {
+  const ag = document.getElementById('act-grid');
+  ag.innerHTML = '';
+  const iconos = ['🎀','👨','🏫','📚','🇵🇪','🏅','👦','🎄'];
+  DATA.actividades.forEach((act, i) => {
+    ag.innerHTML += `<div class="act-card">
+      <div class="act-nombre">${iconos[i%iconos.length]} ${act.nombre}</div>
+      <div class="act-fecha">📅 ${act.fecha}</div>
+    </div>`;
+  });
+}
+
+// Al cargar: renderizar con datos incrustados
+window.addEventListener('load', () => {
+  document.getElementById('loading-overlay').classList.remove('visible');
+  renderDashboard();
+});
+
+// PDF
+function imprimirPDF() {
+  window.print();
+}
+</script>
+</body>
+</html>
