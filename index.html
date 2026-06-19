@@ -56,4 +56,481 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#1a1a2e;min-hei
 
 /* Sections */
 .section{background:#fff;border-radius:16px;box-shadow:var(--sombra);margin-bottom:22px;overflow:hidden}
-.section-header{background:linear-gradient(90deg,var
+.section-header{background:linear-gradient(90deg,var(--cel-h) 0%,var(--cel) 100%);
+  padding:14px 22px;display:flex;align-items:center;gap:10px}
+.section-header h2{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff}
+.section-icon{font-size:18px}
+.section-body{padding:20px 22px;overflow-x:auto}
+
+/* Tabla saldo */
+.tabla-saldo{width:100%;border-collapse:collapse;font-size:12px}
+.tabla-saldo th{background:#e8f4fd;color:var(--cel-d);font-weight:600;
+  padding:8px;text-align:center;border-bottom:2px solid var(--borde);font-size:10.5px;white-space:nowrap}
+.tabla-saldo td{padding:8px;text-align:center;border-bottom:1px solid var(--borde);white-space:nowrap}
+.tabla-saldo tr:last-child td{border-bottom:none;font-weight:600}
+.nv{color:var(--verde);font-weight:600}.nr{color:var(--rojo);font-weight:600}
+
+/* Tabla alumnos */
+.tabla-alumnos{width:100%;border-collapse:collapse;font-size:11.5px;table-layout:auto}
+.tabla-alumnos th{background:var(--cel-d);color:#fff;font-weight:600;
+  padding:6px 4px;text-align:center;font-size:9.5px;white-space:nowrap;width:1%;max-width:60px;overflow:hidden;text-overflow:ellipsis}
+.tabla-alumnos th:nth-child(1){width:2em}
+.tabla-alumnos th:nth-child(2){text-align:left;padding-left:10px;width:auto;min-width:200px;white-space:nowrap}
+.tabla-alumnos td{padding:5px 4px;text-align:center;border-bottom:1px solid var(--borde);white-space:nowrap;width:1%;max-width:60px}
+.tabla-alumnos td:nth-child(2){text-align:left;padding-left:10px;font-weight:500;width:auto;white-space:nowrap;min-width:200px}
+.tabla-alumnos tr:nth-child(even) td{background:#f4f9fd}
+.tabla-alumnos tr:hover td{background:#e8f4fd}
+.ps{background:#d1fae5;color:#065f46;border-radius:4px;padding:2px 4px;font-weight:700;font-size:10px;display:inline-block;white-space:nowrap}
+.pn{background:var(--rojo-lt);color:var(--rojo);border-radius:4px;padding:2px 4px;font-weight:600;font-size:10px;display:inline-block;white-space:nowrap}
+.bok{display:inline-block;background:var(--verde-lt);color:var(--verde);border-radius:12px;padding:2px 8px;font-size:10.5px;font-weight:700}
+.bpd{display:inline-block;background:var(--rojo-lt);color:var(--rojo);border-radius:12px;padding:2px 8px;font-size:10.5px;font-weight:700}
+
+/* Tabla egresos */
+.tabla-egresos{width:100%;border-collapse:collapse;font-size:13px}
+.tabla-egresos th{background:var(--cel-d);color:#fff;font-weight:600;
+  padding:9px 12px;text-align:left;font-size:11px;white-space:nowrap}
+.tabla-egresos th:last-child{text-align:right}
+.tabla-egresos td{padding:8px 12px;border-bottom:1px solid var(--borde);white-space:nowrap}
+.tabla-egresos td:last-child{text-align:right;font-weight:600;color:var(--rojo)}
+.tabla-egresos tr:nth-child(even) td{background:#f4f9fd}
+.mt{display:inline-block;background:#e8f4fd;color:var(--cel-d);border-radius:4px;padding:2px 8px;font-size:10.5px;font-weight:600}
+.at{display:inline-block;background:#FEF3C7;color:#92400E;border-radius:4px;padding:2px 8px;font-size:10.5px;font-weight:600}
+
+/* Pendientes */
+.pdte-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.pdte-card{background:#f4f9fd;border:1px solid var(--borde);border-radius:10px;padding:12px 14px;text-align:center}
+.pdte-mes{font-size:11px;font-weight:600;color:var(--gris);margin-bottom:4px}
+.pdte-num{font-size:22px;font-weight:700;font-family:'Playfair Display',serif;color:var(--rojo)}
+.pdte-label{font-size:10px;color:var(--gris)}
+
+/* Actividades */
+.act-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.act-card{border:1px solid var(--borde);border-radius:10px;padding:14px 16px;background:#f4f9fd}
+.act-nombre{font-weight:600;color:var(--cel-d);font-size:13px}
+.act-fecha{font-size:11px;color:var(--gris);margin-top:4px}
+
+/* VOUCHERS */
+.voucher-mes{margin-bottom:28px}
+.voucher-mes-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;
+  color:var(--cel-d);border-bottom:2px solid var(--borde);padding-bottom:8px;margin-bottom:14px}
+.voucher-imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.voucher-img-wrap{border:1px solid var(--borde);border-radius:10px;overflow:hidden;
+  background:#f4f9fd;cursor:pointer;transition:transform .2s}
+.voucher-img-wrap:hover{transform:scale(1.02)}
+/* Imagen reducida y escalada — no desborda la celda */
+.voucher-img-wrap img{
+  width:100%;
+  height:150px;
+  object-fit:contain;   /* mantiene proporciones, no recorta */
+  object-position:center;
+  display:block;
+  background:#fff;
+}
+.voucher-label{font-size:10px;color:var(--gris);text-align:center;padding:5px}
+.pagos-efectivo{margin-top:10px}
+.pagos-efectivo table{width:100%;border-collapse:collapse;font-size:12px}
+.pagos-efectivo th{background:#f4f9fd;color:var(--cel-d);font-weight:600;
+  padding:7px 10px;text-align:left;border-bottom:2px solid var(--borde)}
+.pagos-efectivo th:last-child{text-align:right}
+.pagos-efectivo td{padding:6px 10px;border-bottom:1px solid var(--borde)}
+.pagos-efectivo td:last-child{text-align:right;color:var(--rojo);font-weight:600}
+
+/* Lightbox */
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:999;
+  align-items:center;justify-content:center;padding:20px}
+#lightbox.open{display:flex}
+#lightbox img{max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+#lightbox-close{position:absolute;top:20px;right:28px;color:#fff;font-size:36px;cursor:pointer;
+  line-height:1;font-weight:300}
+
+/* Loading */
+#loading{display:flex;position:fixed;inset:0;background:rgba(240,247,252,.92);z-index:100;
+  align-items:center;justify-content:center;flex-direction:column;gap:14px}
+#loading.hide{display:none}
+.spinner{width:40px;height:40px;border:4px solid var(--borde);border-top-color:var(--cel-d);
+  border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-txt{font-family:'Playfair Display',serif;color:var(--cel-d);font-size:16px}
+
+/* Print / PDF */
+@media print{
+  .toolbar{display:none!important}
+  #lightbox{display:none!important}
+  #loading{display:none!important}
+  body{background:#fff}
+  .section{box-shadow:none;border:1px solid #ddd;page-break-inside:avoid}
+  .header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .kpi{box-shadow:none;border:1px solid #ddd}
+
+  /* Vouchers en PDF: 3 columnas, imágenes compactas */
+  .voucher-imgs{grid-template-columns:repeat(3,1fr);gap:8px}
+  .voucher-img-wrap img{
+    height:100px;        /* altura reducida para PDF */
+    object-fit:contain;
+    max-width:100%;
+  }
+
+  .tabla-alumnos,.tabla-saldo,.tabla-egresos{font-size:9px}
+  .tabla-alumnos th,.tabla-alumnos td,.tabla-saldo th,.tabla-saldo td{padding:3px}
+  @page{margin:1cm;size:A4}
+}
+@media(max-width:600px){
+  .tabla-alumnos{font-size:10px}
+  .voucher-imgs{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="loading">
+  <div class="spinner"></div>
+  <div class="loading-txt">Cargando Balance JAD 2B…</div>
+</div>
+
+<div id="lightbox" onclick="closeLB()">
+  <span id="lightbox-close" onclick="closeLB()">×</span>
+  <img id="lightbox-img" src="" alt="voucher">
+</div>
+
+<div class="header">
+  <span class="gen-date"><span class="update-dot"></span>Actualizado: <span id="gen-date">–</span></span>
+  <h1>JUANA ALARCO DE DAMMERT · Aula 2B</h1>
+  <p class="header-sub">BALANCE JAD 2026</p>
+</div>
+
+<div class="toolbar">
+  <button class="btn btn-pdf" onclick="window.print()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    Descargar PDF
+  </button>
+  <span class="status-bar" id="status-bar">Conectando…</span>
+</div>
+
+<div class="container">
+  <div class="kpi-grid" id="kpi-grid"></div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-icon">📅</span><h2>Saldo Mensual</h2></div>
+    <div class="section-body"><table class="tabla-saldo" id="tabla-saldo"></table></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-icon">⚠️</span><h2>Padres Pendientes por Mes</h2></div>
+    <div class="section-body"><div class="pdte-grid" id="pdte-grid"></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-icon">💰</span><h2>Registro de Ingresos por Alumno</h2></div>
+    <div class="section-body"><table class="tabla-alumnos" id="tabla-alumnos"></table></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-icon">🧾</span><h2>Egresos Detallados</h2></div>
+    <div class="section-body"><table class="tabla-egresos" id="tabla-egresos"></table></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-icon">🎉</span><h2>Actividades del Año</h2></div>
+    <div class="section-body"><div class="act-grid" id="act-grid"></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-header"><span class="section-icon">🧾</span><h2>Vouchers</h2></div>
+    <div class="section-body">
+      <iframe src="https://MIKIDEPERU.github.io/voucher-jad/?d=jad-2b"
+              width="100%" height="700"
+              style="border:none;border-radius:8px;display:block;">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('gen-date').textContent = new Date().toLocaleDateString('es-PE',{day:'2-digit',month:'long',year:'numeric'});
+
+// ── Lightbox ──
+function openLB(src){ document.getElementById('lightbox-img').src=src; document.getElementById('lightbox').classList.add('open'); }
+function closeLB(){ document.getElementById('lightbox').classList.remove('open'); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLB(); });
+
+// ── Fetch con auto-refresh ──
+let lastGenerated = '';
+
+async function loadData(){
+  try{
+    const r = await fetch('/_data?t='+Date.now());
+    if(!r.ok) throw new Error('sin datos');
+    const data = await r.json();
+    if(!data.generated) return;
+    if(data.generated !== lastGenerated){
+      lastGenerated = data.generated;
+      render(data);
+      document.getElementById('gen-date').textContent = data.generated;
+      document.getElementById('status-bar').textContent = '✅ En vivo · actualiza al guardar el Excel';
+      document.getElementById('loading').classList.add('hide');
+    }
+  }catch(e){
+    document.getElementById('status-bar').textContent = '';
+    document.getElementById('loading').classList.add('hide');
+  }
+}
+
+function render(d){
+  parseSaldo(d.saldo);
+  parsePendientesMes(d.pendientes_mes);
+  parseIngresos(d.ingresos);
+  parseEgresos(d.egresos);
+  parseActividades(d.actividades);
+}
+
+loadData();
+setInterval(loadData, 4000);
+
+// ══════════════════════════════════════════
+// PARSERS
+// ══════════════════════════════════════════
+
+// ── SALDO ──
+function parseSaldo(rows){
+  if(!rows||!rows.length) return;
+  let ingRow=-1,egrRow=-1,saldoRow=-1,mesRow=-1;
+  for(let i=0;i<rows.length;i++){
+    const r=rows[i]; if(!r) continue;
+    if(r.some(c=>String(c||'').includes('Abril'))) mesRow=i;
+    if(String(r[1]||'').toUpperCase()==='INGRESOS') ingRow=i;
+    if(String(r[1]||'').toUpperCase()==='EGRESOS')  egrRow=i;
+    if(String(r[1]||'').toUpperCase()==='SALDO MES') saldoRow=i;
+  }
+  if(mesRow<0||ingRow<0) return;
+  const hRow=rows[mesRow], iRow=rows[ingRow], eRow=rows[egrRow]||[], sRow=rows[saldoRow]||[];
+  const meses=[],ingresos=[],egresos=[],saldos=[];
+  for(let c=2;c<hRow.length;c++){
+    if(hRow[c]!==null&&hRow[c]!==undefined&&hRow[c]!==''){
+      meses.push(hRow[c]); ingresos.push(iRow[c]); egresos.push(eRow[c]); saldos.push(sRow[c]);
+    }
+  }
+  const tI=parseFloat(ingresos[ingresos.length-1]||0);
+  const tE=Math.abs(parseFloat(egresos[egresos.length-1]||0));
+  const tS=parseFloat(saldos[saldos.length-1]||0);
+  let fechaS='';
+  for(const r of rows){ if(!r) continue; for(let c=0;c<r.length;c++){
+    if(String(r[c]||'').includes('SALDO AL')){ const d=r[c+1]; if(d) fechaS=String(d).split(' ')[0].split('T')[0]; break; }
+  }}
+  document.getElementById('kpi-grid').innerHTML=`
+  <div class="kpi verde"><div class="kpi-label">Total Ingresos</div>
+    <div class="kpi-value">S/ ${tI.toLocaleString('es-PE',{minimumFractionDigits:2})}</div>
+    <div class="kpi-sub">Acumulado año 2026</div></div>
+  <div class="kpi rojo"><div class="kpi-label">Total Egresos</div>
+    <div class="kpi-value">S/ ${tE.toLocaleString('es-PE',{minimumFractionDigits:2})}</div>
+    <div class="kpi-sub">Gastos registrados</div></div>
+  <div class="kpi ${tS>=0?'verde':'rojo'}"><div class="kpi-label">Saldo Disponible</div>
+    <div class="kpi-value">S/ ${tS.toLocaleString('es-PE',{minimumFractionDigits:2})}</div>
+    <div class="kpi-sub">${fechaS?'Al '+fechaS:''}</div></div>`;
+
+  const cv=(v,cat)=>{
+    const n=parseFloat(v); if(isNaN(n)||n===0) return '<td>–</td>';
+    const s=`S/ ${n.toLocaleString('es-PE',{minimumFractionDigits:2})}`;
+    if(cat==='I') return `<td class="nv">${s}</td>`;
+    if(cat==='E') return `<td class="nr">${s}</td>`;
+    return `<td class="${n>=0?'nv':'nr'}">${s}</td>`;
+  };
+  document.getElementById('tabla-saldo').innerHTML=
+  `<thead><tr><th>Concepto</th>${meses.map(m=>`<th>${m}</th>`).join('')}</tr></thead>
+   <tbody>
+   <tr><td><strong>Ingresos</strong></td>${ingresos.map(v=>cv(v,'I')).join('')}</tr>
+   <tr><td><strong>Egresos</strong></td>${egresos.map(v=>cv(v,'E')).join('')}</tr>
+   <tr><td><strong>Saldo Mes</strong></td>${saldos.map(v=>cv(v,'S')).join('')}</tr>
+   </tbody>`;
+}
+
+// ── PENDIENTES POR MES (desde campo pre-calculado en servidor) ──
+function parsePendientesMes(pendientes){
+  const grid = document.getElementById('pdte-grid');
+  if(!pendientes || !pendientes.length){
+    grid.innerHTML = '<p style="color:var(--gris);font-size:13px">Sin datos registrados</p>';
+    return;
+  }
+  grid.innerHTML = pendientes.map(p => `
+    <div class="pdte-card">
+      <div class="pdte-mes">${p.mes}</div>
+      <div class="pdte-num" style="color:${p.pendientes > 0 ? 'var(--rojo)' : 'var(--verde)'}">
+        ${p.pendientes}
+      </div>
+      <div class="pdte-label">${p.pendientes === 1 ? 'padre pendiente' : p.pendientes > 0 ? 'padres pendientes' : 'al día ✓'}</div>
+    </div>`).join('');
+}
+
+// ── INGRESOS (tabla de alumnos) ──
+function parseIngresos(rows){
+  if(!rows||!rows.length) return;
+  let mesRow=-1,hRow2=-1,alumStart=-1;
+  for(let i=0;i<rows.length;i++){
+    const r=rows[i]; if(!r) continue;
+    if(r.some(c=>String(c||'').includes('Abril')||String(c||'').includes('abril'))) mesRow=i;
+    if(r.some(c=>String(c||'').includes('CUOTA MES'))) hRow2=i;
+    if(String(r[1]||'').trim()==='N°') alumStart=i+1;
+  }
+  if(mesRow<0) return;
+
+  const mRow=rows[mesRow]||[], hR=hRow2>=0?rows[hRow2]:[];
+
+  // Construir columnas dinámicamente: agrupar por mes, incluir todas las sub-cuotas
+  // Una columna de header por mes, con todas sus sub-cuotas como columnas de datos
+  const mesGroups = []; // [{mes, cols:[{colIdx, sub}]}]
+  let currentMes = null;
+  for(let c=3; c<mRow.length-3; c++){
+    const mesVal = String(mRow[c]||'').trim();
+    const subVal = String(hR[c]||'').trim();
+    if(mesVal && mesVal[0] >= '0' && mesVal[0] <= '9'){
+      // nuevo mes
+      currentMes = {mes: mesVal.replace(/^\d+\.\s*/, ''), cols:[]};
+      mesGroups.push(currentMes);
+    }
+    if(currentMes && (subVal || mesVal)){
+      // Solo agregar si hay sub-label o el mes acaba de empezar
+      if(subVal || mesGroups[mesGroups.length-1].cols.length === 0){
+        currentMes.cols.push({colIdx: c, sub: subVal || 'CUOTA'});
+      }
+    }
+  }
+
+  // Alumnos
+  const alumnos=[];
+  if(alumStart>0){
+    for(let i=alumStart;i<rows.length;i++){
+      const r=rows[i]; if(!r) continue;
+      const num=r[1],nom=r[2];
+      if(nom===null||String(nom||'').toUpperCase()==='TOTAL') break;
+      if(String(nom||'').toUpperCase().includes('DONAC')) continue;
+      if(typeof num!=='number'&&isNaN(parseInt(num))) continue;
+      let esBaja = false;
+      for(let c=0;c<r.length;c++){
+        if(String(r[c]||'').toUpperCase().trim()==='BAJA'){ esBaja=true; break; }
+      }
+      alumnos.push({num,nom:String(nom||'').trim(),row:r,acum:r[21],pend:r[22],baja:esBaja});
+    }
+  }
+
+  // Construir encabezado: fila1 = meses (colspan por num cols), fila2 = sub-cuotas
+  let thead1 = '<tr><th rowspan="2">N°</th><th rowspan="2" style="text-align:left">Alumna</th>';
+  let thead2 = '';
+  for(const g of mesGroups){
+    thead1 += `<th colspan="${g.cols.length}" style="border-left:2px solid rgba(255,255,255,.3)">${g.mes}</th>`;
+    for(let ci=0; ci<g.cols.length; ci++){
+      const s = g.cols[ci].sub.replace('CUOTA ','');
+      const border = ci===0 ? 'border-left:2px solid rgba(255,255,255,.3)' : '';
+      thead2 += `<th style="${border};font-size:9px;font-weight:400">${s}</th>`;
+    }
+  }
+  thead1 += '<th rowspan="2">Acumul.</th><th rowspan="2">Pendiente</th></tr>';
+
+  const thead = `<thead>${thead1}<tr>${thead2}</tr></thead>`;
+
+  const tbody=`<tbody>${alumnos.map(a=>{
+    let celdas='';
+    for(const g of mesGroups){
+      for(let ci=0; ci<g.cols.length; ci++){
+        const {colIdx} = g.cols[ci];
+        const v = colIdx < a.row.length ? a.row[colIdx] : null;
+        const border = ci===0 ? 'border-left:2px solid var(--borde)' : '';
+        if(v===null||v===undefined||v===''){
+          celdas += `<td style="${border}"><span class="pn">–</span></td>`;
+        } else {
+          celdas += `<td style="${border}"><span class="ps">S/${parseFloat(v).toFixed(0)}</span></td>`;
+        }
+      }
+    }
+    const acum=a.acum!==null&&a.acum!==undefined?`<td><strong>S/ ${parseFloat(a.acum).toFixed(2)}</strong></td>`:'<td>–</td>';
+    const p=(a.pend===0||a.pend===null||a.pend===undefined);
+    const bajaStyle = a.baja ? 'opacity:.65;background:#fafafa;' : '';
+    const bajaBadge = a.baja ? '<span style="display:inline-block;background:#6B7280;color:#fff;border-radius:12px;padding:2px 8px;font-size:10px;font-weight:700;margin-left:4px">BAJA</span>' : '';
+    return `<tr style="${bajaStyle}"><td style="color:var(--gris);font-weight:600">${a.num}</td>
+      <td>${a.nom}${bajaBadge}</td>${celdas}${acum}
+      <td><span class="${p||a.baja?'bok':'bpd'}">${a.baja?'Baja':p?'Al día':'S/ '+parseFloat(a.pend||0).toFixed(0)}</span></td></tr>`;
+  }).join('')}</tbody>`;
+  document.getElementById('tabla-alumnos').innerHTML=thead+tbody;
+}
+
+// ── EGRESOS (saldo totalizado por mes, según columnas MES GASTO / TOTAL MES del Excel) ──
+function parseEgresos(rows){
+  if(!rows||!rows.length) return;
+  let hRow=-1,colMes=-1,colTotal=-1;
+  for(let i=0;i<rows.length;i++){
+    const r=rows[i]; if(!r) continue;
+    const idxTot=r.findIndex(c=>String(c||'').toUpperCase().trim()==='TOTAL MES');
+    if(idxTot<0) continue;
+    // "MES GASTO" del bloque resumen es la columna inmediatamente anterior a "TOTAL MES"
+    if(String(r[idxTot-1]||'').toUpperCase().trim()==='MES GASTO'){
+      hRow=i; colMes=idxTot-1; colTotal=idxTot; break;
+    }
+  }
+  const meses=[];
+  let totalGeneral=0;
+  if(hRow>=0){
+    for(let i=hRow+1;i<rows.length;i++){
+      const r=rows[i]; if(!r) continue;
+      const mesVal=r[colMes];
+      if(mesVal===null||mesVal===undefined||String(mesVal).trim()==='') continue;
+      if(String(mesVal).toUpperCase().trim()==='TOTAL'){
+        const tg=r[colTotal];
+        if(tg!==null&&tg!==undefined&&!isNaN(parseFloat(tg))) totalGeneral=parseFloat(tg);
+        continue;
+      }
+      const tot=r[colTotal];
+      meses.push({
+        mes:String(mesVal).trim(),
+        total: (tot===null||tot===undefined||isNaN(parseFloat(tot))) ? 0 : parseFloat(tot)
+      });
+    }
+  }
+  if(!totalGeneral) totalGeneral=meses.reduce((s,m)=>s+m.total,0);
+  document.getElementById('tabla-egresos').innerHTML=meses.length?
+  `<thead><tr><th>Mes</th><th style="text-align:right">Total Gastado</th></tr></thead>
+   <tbody>
+   ${meses.map(m=>`<tr>
+     <td><span class="mt">${m.mes.replace(/^\d+\.\s*/,'')}</span></td>
+     <td>S/ ${m.total.toLocaleString('es-PE',{minimumFractionDigits:2})}</td></tr>`).join('')}
+   <tr style="background:#fee2e2">
+     <td style="text-align:right;font-weight:700;color:#991b1b;padding:10px 12px">TOTAL EGRESOS</td>
+     <td style="font-weight:700;color:#991b1b;text-align:right;padding:10px 12px">S/ ${totalGeneral.toLocaleString('es-PE',{minimumFractionDigits:2})}</td>
+   </tr></tbody>`
+  :'<tr><td>Sin egresos registrados</td></tr>';
+}
+
+// ── ACTIVIDADES ──
+function parseActividades(rows){
+  if(!rows||!rows.length) return;
+  let hRow=-1;
+  for(let i=0;i<rows.length;i++){
+    const r=rows[i]; if(!r) continue;
+    if(r.some(c=>String(c||'').toUpperCase()==='ACTIVIDAD')){ hRow=i; break; }
+  }
+  const acts=[];
+  if(hRow>=0){
+    const hr=rows[hRow];
+    let ca=-1,cf=-1;
+    for(let c=0;c<hr.length;c++){
+      if(String(hr[c]||'').toUpperCase()==='ACTIVIDAD') ca=c;
+      if(String(hr[c]||'').toUpperCase()==='FECHA') cf=c;
+    }
+    if(ca>=0) for(let i=hRow+1;i<rows.length;i++){
+      const r=rows[i]; if(!r) continue;
+      const a=r[ca]; if(a===null||String(a||'').trim()==='') continue;
+      acts.push({act:String(a).trim(),fecha:cf>=0&&r[cf]?String(r[cf]).trim():''});
+    }
+  }
+  const emojis=['🎀','👨‍👩‍👧','🎂','🍎','🇵🇪','🏆','👶','🎄','⭐','🎊'];
+  document.getElementById('act-grid').innerHTML=acts.length
+    ? acts.map((a,i)=>`<div class="act-card">
+        <div class="act-nombre">${emojis[i%emojis.length]} ${a.act}</div>
+        <div class="act-fecha">📅 ${a.fecha||'Fecha por confirmar'}</div>
+      </div>`).join('')
+    : '<p style="color:var(--gris)">Sin actividades registradas</p>';
+}
+</script>
+</body>
+</html>
